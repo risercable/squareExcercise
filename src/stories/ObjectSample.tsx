@@ -1,9 +1,10 @@
 import React from 'react'
-import SVG from '../assets/right-arrow-svgrepo-com.svg';
+import SVG from '../assets/accelerate-svgrepo-com.svg';
 
-export const ObjectSample = (props) => {
+export const ObjectSample = ({rotation}) => {
+  console.log(rotation, '---------------');
   return (
-    <img height="20" width="20" alt="Sampler Arrow ${position}" src={SVG}/>
+    <img height="65" width="65" alt="Sampler Arrow ${position}" src={SVG} style={{ transform: `rotate(${rotation}deg)`, transition: 'transform 0.2s ease' }} />
   )
 }
 

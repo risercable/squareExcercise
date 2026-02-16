@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import FieldHandler from './FieldHandler'
 import { Button, TextField } from '@mui/material';
+import SelectHandler from './SelectHandler';
 
 const style ={
     margin: '100',
@@ -32,10 +33,9 @@ export const ContainerForm = (props) => {
         console.log(value);
     };
 
-    const setDataBack = (item) => {
-        useEffect(() => {
-            props.updatedProps(item);
-        }, [props.updatedProps]); 
+    const chainChange = (val) => {
+        handleChange('direction-key', val)
+        props.updatedProps(data)
     }
 
   return (
@@ -44,7 +44,7 @@ export const ContainerForm = (props) => {
             <FieldHandler key={`index-$${index}`} max='4' id={grabId(field.label)} label={field.label} onChange={(e) => handleChange(grabId(field.label), e)} variant="outlined" />
         ))}
 
-        <TextField onChange={(e) => handleChange('direction', e)} label={"Direction"}>Confirm</TextField>
+        <SelectHandler chainChange={chainChange} />
             
         <div style={{ display:'grid', placeItems: 'center' }}> 
             <Button variant="contained" style={{ alignItems: 'center'}} onClick={() => props.updatedProps(data)}>Confirm</Button>

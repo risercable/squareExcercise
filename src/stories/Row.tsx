@@ -26,7 +26,7 @@ export const Row = ({ cells }) => {
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
     >
     {cells.map((cell, index) => (
-        <Grid key={`index-$${index}`} isShow={cell.isShow}/>
+        <Grid key={`index-$${index}`} isShow={cell.isShow} rotation={cell.rotation}/>
     ))}
     </TableRow>
   )

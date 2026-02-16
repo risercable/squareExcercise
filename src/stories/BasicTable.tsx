@@ -10,6 +10,7 @@ import Row from './Row';
 import ContainerForm from './ContainerForm';
 import type { RowData } from '../types';
 import Grid from './Grid';
+import { DIRECTIONS, DIRECTIONS_INITIALS } from '../constants';
 
 export interface TableProps {
   /** Is this the principal call to action on the page? */
@@ -34,11 +35,12 @@ function createData(
 
 function createCell(
   isShow: boolean,
+  rotation: number,
   style?: {
     backgroundColor: string,
   },
 ) {
-  return { isShow, style };
+  return { isShow, rotation, style };
 }
 
 function reverseNumberInRange(n) {
@@ -48,14 +50,26 @@ function reverseNumberInRange(n) {
 }
 
 const calculateRender = (fromData = null) => {  
-  let [firstKey, secondKey] = fromData ? Object.values(fromData) : [];
+  let [direction, xcoord, yCoord] = fromData ? Object.values(fromData) : [];
   let newRows = [];
+
+  let anglesArr = [0, 90, -90, 180];
+  let angle = 0;
+
+  const keys = Object.keys(DIRECTIONS_INITIALS); 
+
+  const index = Object.values(DIRECTIONS_INITIALS).indexOf(direction);
+
+  if (index !== -1) {
+    angle = anglesArr[index];
+    console.log(angle);
+  }
   
   for (let x = 0; x < 5; x++) {
     let cells = [];
     for (let y = 0; y < 5; y++) {
-      const isShowIcon = reverseNumberInRange(firstKey) === x && secondKey === y;
-      cells.push(createCell(isShowIcon));
+      const isShowIcon = reverseNumberInRange(xcoord) === x && yCoord === y;
+      cells.push(createCell(isShowIcon, isShowIcon ? angle : 0));
     }
 
     newRows.push(createData(1, cells));
