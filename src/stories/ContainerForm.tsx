@@ -1,8 +1,8 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import FieldHandler from './FieldHandler'
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 
 const style ={
     margin: '100',
@@ -13,30 +13,41 @@ const style ={
 
 const grabId = (str: string) => `outlined-${str.at(str.length - 1)}`;
 
-function createData(
+function createField(
     label: string,
     notATextField?: boolean
 ) { return { label, flag: notATextField }}
 
-const fields = [
-    createData('Coords X'),
-    createData('Coords Y'),
+const numFields = [
+    createField('Coords X'),
+    createField('Coords Y'),
 ]
 
-// TODO 
-const parseCoords = () => {
-    return <p>{''}</p>;
-}
-
 export const ContainerForm = (props) => {
+    const [data, setData] = useState({});
+
+    const handleChange = (key, value) => {
+        data[key] = value
+        setData(data)
+        console.log(value);
+    };
+
+    const setDataBack = (item) => {
+        useEffect(() => {
+            props.updatedProps(item);
+        }, [props.updatedProps]); 
+    }
+
   return (
     <div style={style}>
-        {fields.map((field) => (
-            <FieldHandler id={grabId(field.label)} label={field.label} variant="outlined" />
+        {numFields.map((field, index) => (
+            <FieldHandler key={`index-$${index}`} max='4' id={grabId(field.label)} label={field.label} onChange={(e) => handleChange(grabId(field.label), e)} variant="outlined" />
         ))}
+
+        <TextField onChange={(e) => handleChange('direction', e)} label={"Direction"}>Confirm</TextField>
             
         <div style={{ display:'grid', placeItems: 'center' }}> 
-            <Button variant="contained" style={{ alignItems: 'center'}} onClick={parseCoords}>Confirm</Button>
+            <Button variant="contained" style={{ alignItems: 'center'}} onClick={() => props.updatedProps(data)}>Confirm</Button>
         </div>
     </div>
   )

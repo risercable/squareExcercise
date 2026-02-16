@@ -3,11 +3,11 @@ import TableCell from '@mui/material/TableCell';
 import type { GridData } from '../types';
 import ObjectSample from './ObjectSample';
 
-export const Grid = ({key, icon, style}: GridData) => {
+export const Grid = ({ isShow}: GridData) => {
   return (
     <TableCell component="th" scope="row">
-        TEST {key} 
-        { icon ? <ObjectSample /> : ''  }
+        TEST
+        { isShow ? <ObjectSample /> : ''  }
     </TableCell>
   )
 }

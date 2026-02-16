@@ -1,5 +1,11 @@
 export type GridData = {
   key: string;
   style?: any;
-  icon: boolean;
+  isShow: boolean;
 };
+
+export type RowData = {
+    position: number;
+    cells: any;
+    showIcon?: boolean;
+}

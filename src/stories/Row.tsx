@@ -20,18 +20,15 @@ const cells = [
     createData('Grid 5', false, { backgroundColor: '#006666'})
 ];
 
-export const Row = ({isRendered, key}) => {
+export const Row = ({ cells }) => {
   return (
-    <div>
     <TableRow
-        key={key}
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
     >
-    {cells.map((cell) => (
-        <Grid key={cell.key} style={cell.style} icon={isRendered && cell.pos}/>
+    {cells.map((cell, index) => (
+        <Grid key={`index-$${index}`} isShow={cell.isShow}/>
     ))}
     </TableRow>
-    </div>
   )
 }
 
