@@ -16,19 +16,25 @@ const grabId = (str: string) => `outlined-${str.at(str.length - 1)}`;
 
 function createField(
     label: string,
+    valueId: string,
     notATextField?: boolean
-) { return { label, flag: notATextField }}
+) { return { label, valueId, flag: notATextField }}
 
 const numFields = [
-    createField('Coords X'),
-    createField('Coords Y'),
+    createField('Coords X', 'coords-x'),
+    createField('Coords Y', 'coords-y'),
 ]
 
-export const ContainerForm = (props) => {
-    const [data, setData] = useState({});
+export const ContainerForm = ({coords, ...props}) => {
+    const [data, setData] = useState(coords);
+
+    let [direction, coordsX, coordsY] = Object.values(coords);
+    let [directionKey, xKey, yKey] = Object.keys(coords);
 
     const handleChange = (key, value) => {
-        data[key] = value
+        
+        data[key] = value;
+
         setData(data)
         console.log(value);
     };
@@ -41,10 +47,10 @@ export const ContainerForm = (props) => {
   return (
     <div style={style}>
         {numFields.map((field, index) => (
-            <FieldHandler key={`index-$${index}`} max='4' id={grabId(field.label)} label={field.label} onChange={(e) => handleChange(grabId(field.label), e)} variant="outlined" />
+            <FieldHandler key={JSON.stringify(field)} defaultValue={data[field.valueId]} fieldKey={field.valueId} max='4' label={field.label} onValueChange={(e) => handleChange(field.valueId, e)} variant="outlined" />
         ))}
 
-        <SelectHandler chainChange={chainChange} />
+        <SelectHandler directionState={coords[directionKey]} chainChange={chainChange} />
             
         <div style={{ display:'grid', placeItems: 'center' }}> 
             <Button variant="contained" style={{ alignItems: 'center'}} onClick={() => props.updatedProps(data)}>Confirm</Button>

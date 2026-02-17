@@ -15,8 +15,8 @@ const options = [
     createOptions('South', 's'),
 ]
 
-export const SelectHandler = (props) => {
-    const [direction, setDirection] = useState('n');
+export const SelectHandler = ({directionState, ...props}) => {
+    const [direction, setDirection] = useState(directionState);
 
     const handleChange = (event) => {
         if (typeof event !== 'string') { event = event.target.value };
@@ -26,6 +26,10 @@ export const SelectHandler = (props) => {
     };
 
     useEffect(() => {
+        if (props.value) {
+            setDirection(props.value)
+        }
+
         if (direction) {
             props.chainChange(direction);
         }

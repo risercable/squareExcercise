@@ -9,20 +9,15 @@ import './button.css';
 import Row from './Row';
 import ContainerForm from './ContainerForm';
 import type { RowData } from '../types';
-import Grid from './Grid';
+import Grid from './GridComponent';
 import { DIRECTIONS, DIRECTIONS_INITIALS } from '../constants';
 
 export interface TableProps {
-  /** Is this the principal call to action on the page? */
-  primary?: boolean;
-  /** What background color to use */
-  backgroundColor?: string;
-  /** How large should the button be? */
-  size?: 'small' | 'medium' | 'large';
-  /** Button contents */
-  label: string;
-  /** Optional click handler */
-  onClick?: () => void;
+  coords: {
+    "direction-key": string,
+    "coords-x": number,
+    "coords-y": number
+  }
 }
 
 function createData(
@@ -49,14 +44,13 @@ function reverseNumberInRange(n) {
   return max + min - n;
 }
 
-const calculateRender = (fromData = null) => {  
+const calculateRender = (fromData) => {
+  console.log(fromData) ;
   let [direction, xcoord, yCoord] = fromData ? Object.values(fromData) : [];
   let newRows = [];
 
   let anglesArr = [0, 90, -90, 180];
   let angle = 0;
-
-  const keys = Object.keys(DIRECTIONS_INITIALS); 
 
   const index = Object.values(DIRECTIONS_INITIALS).indexOf(direction);
 
@@ -82,6 +76,7 @@ const calculateRender = (fromData = null) => {
 
 /** Primary UI component for user interaction */
 export const BasicTable = ({
+  coords,
   ...props
 }: TableProps) => {
   const [data, setData] = useState({});
@@ -89,9 +84,13 @@ export const BasicTable = ({
   const [rows, setRows] = useState(emptyRows);
 
   if (!rows.length) {
-    let initRows = calculateRender();
+    let initRows;
+    initRows = calculateRender({});
+    
     setRows(initRows);
   }
+
+  
 
   const refreshCoords = (val) => {
     setData(val);
@@ -102,7 +101,7 @@ export const BasicTable = ({
 
   return (
     <div>
-      <ContainerForm updatedProps={refreshCoords} />
+      <ContainerForm key={JSON.stringify(coords)} updatedProps={refreshCoords} coords={coords} />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>

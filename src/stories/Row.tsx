@@ -1,5 +1,5 @@
 import React from 'react'
-import Grid from './Grid'
+import Grid from './GridComponent'
 import { TableRow } from '@mui/material';
 
 function createData(
