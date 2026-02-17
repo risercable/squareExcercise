@@ -1,8 +1,9 @@
 import React from 'react'
 import { BasicTable } from './BasicTable'
+import { DIRECTIONS_INITIALS } from '../constants';
 
 const coords = {
-    "direction-key": 'w',
+    "direction-key": DIRECTIONS_INITIALS.west,
     "coords-x": 4,
     "coords-y": 4
 };

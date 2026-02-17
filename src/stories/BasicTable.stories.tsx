@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { BasicTable } from './BasicTable';
+import { fn } from 'storybook/test';
 import WestTable from './WestTable';
 
 const meta = {
@@ -13,10 +14,13 @@ const meta = {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  args: {
+    onReset: fn(),
+  },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
-} satisfies Meta<typeof BasicTable>;
+} satisfies Meta<typeof WestTable>;
 
 export default meta;
 
