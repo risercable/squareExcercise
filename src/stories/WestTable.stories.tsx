@@ -27,7 +27,7 @@ export const Default: Story = {
         resetArgs();
       }, []);
 
-      return <Story {...context} />;
+      return <Story {...context} />                  ;
     },
   ],
 };
