@@ -18,7 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export const ObjectSample = ({rotation}) => {
   console.log(rotation, '---------------');
   return (
-    <img height="65" alt="Sampler Arrow ${position}" src={SVG} style={{ transform: `rotate(${rotation}deg)`, transition: 'transform 0.2s ease', position: 'absolute', textAlign: 'center' }} />
+    <img height="65" alt="Sampler Arrow ${position}" src={SVG} style={{ transform: `rotate(${rotation}deg)`, transition: 'transform 0.2s ease', textAlign: 'center' }} />
   )
 }
 

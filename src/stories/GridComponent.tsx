@@ -23,7 +23,7 @@ export const GridComponent = ({ isShow, rotation }: GridData) => {
   return (
     <TableCell component="th" scope="row">
         <Grid size={4}>
-          <Item>{ isShow ? <ObjectSample rotation={rotation}  /> : ''  }</Item>
+          <Item style={{'display': 'block'}}>{ isShow ? <ObjectSample rotation={rotation}  /> : ''  }</Item>
         </Grid>
     </TableCell>
   )
