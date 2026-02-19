@@ -21,7 +21,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const GridComponent = ({ isShow, rotation }: GridData) => {
   return (
-    <TableCell component="th" scope="row">
+    <TableCell component="th" scope="row" style={{"width": "20%"}}>
         <Grid size={4}>
           <Item style={{'display': 'block'}}>{ isShow ? <ObjectSample rotation={rotation}  /> : ''  }</Item>
         </Grid>
