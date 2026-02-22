@@ -102,7 +102,7 @@ export const BasicTable = ({
   return (
     <div>
       <ContainerForm key={JSON.stringify(coords)} updatedProps={refreshCoords} coords={coords} />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{width: '60%'}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             {rows.map((row, index) => (
